@@ -64,16 +64,17 @@ const BookingPage = () => {
   }
 
   return (
-    <section className="grid gap-6 lg:grid-cols-2">
+    <section className="grid gap-5 sm:gap-6 lg:grid-cols-2">
       <article className="card">
         <img
           src={room.images?.[0] || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'}
           alt={room.type}
-          className="h-64 w-full rounded-lg object-cover"
+          className="h-56 w-full rounded-lg object-cover sm:h-64"
         />
         <div className="mt-4 space-y-2">
-          <h1 className="text-2xl font-bold text-slate-900">Room {room.roomNumber}</h1>
-          <p className="text-sm capitalize text-slate-600">{room.type} room</p>
+          <p className="surface-subtitle">Selected Room</p>
+          <h1 className="display-font text-3xl font-semibold text-ink-900 sm:text-4xl">Room {room.roomNumber}</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">{room.type} room</p>
           <p className="text-xl font-bold text-brand-700">{formatCurrency(room.price)} / night</p>
         </div>
       </article>

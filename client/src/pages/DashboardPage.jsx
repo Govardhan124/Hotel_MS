@@ -39,15 +39,16 @@ const DashboardPage = () => {
   return (
     <section className="space-y-6">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-slate-900">Welcome, {user?.name || 'User'}</h1>
-        <p className="text-sm text-slate-600">Track your bookings and account activity.</p>
+        <p className="surface-subtitle">Overview</p>
+        <h1 className="surface-title">Welcome, {user?.name || 'User'}</h1>
+        <p className="text-sm text-slate-600">Track reservations, cancellations, and payment status in one place.</p>
       </header>
 
       <DashboardStats bookings={bookings} userRole={user?.role} />
 
       <section className="card">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-slate-900">Booking History</h2>
+          <h2 className="display-font text-2xl font-semibold text-ink-900 sm:text-3xl">Booking History</h2>
         </div>
 
         {loading ? (
@@ -55,29 +56,29 @@ const DashboardPage = () => {
         ) : bookings.length === 0 ? (
           <p className="text-sm text-slate-600">No bookings found yet.</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
+          <div className="table-shell overflow-x-auto rounded-xl border border-slate-200 bg-white/70 p-2">
+            <table className="min-w-full">
               <thead>
-                <tr className="border-b border-slate-200 text-left text-slate-500">
-                  <th className="py-2">Room</th>
-                  <th className="py-2">Dates</th>
-                  <th className="py-2">Status</th>
-                  <th className="py-2">Payment</th>
-                  <th className="py-2">Total</th>
-                  <th className="py-2">Action</th>
+                <tr>
+                  <th>Room</th>
+                  <th>Dates</th>
+                  <th>Status</th>
+                  <th>Payment</th>
+                  <th>Total</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {bookings.map((booking) => (
-                  <tr key={booking._id} className="border-b border-slate-100">
-                    <td className="py-3">{booking.room?.roomNumber || '-'}</td>
-                    <td className="py-3">
+                  <tr key={booking._id}>
+                    <td>{booking.room?.roomNumber || '-'}</td>
+                    <td>
                       {formatDate(booking.checkIn)} - {formatDate(booking.checkOut)}
                     </td>
-                    <td className="py-3 capitalize">{booking.status}</td>
-                    <td className="py-3 capitalize">{booking.paymentStatus}</td>
-                    <td className="py-3">{formatCurrency(booking.totalPrice)}</td>
-                    <td className="py-3">
+                    <td className="capitalize">{booking.status}</td>
+                    <td className="capitalize">{booking.paymentStatus}</td>
+                    <td>{formatCurrency(booking.totalPrice)}</td>
+                    <td>
                       {booking.status === 'confirmed' ? (
                         <button type="button" className="btn-secondary" onClick={() => handleCancel(booking._id)}>
                           Cancel

@@ -83,31 +83,32 @@ const AdminPanelPage = () => {
   return (
     <section className="space-y-6">
       <header>
-        <h1 className="text-2xl font-bold text-slate-900">Admin Panel</h1>
-        <p className="text-sm text-slate-600">Manage users, rooms, bookings and revenue.</p>
+        <p className="surface-subtitle">Operations Console</p>
+        <h1 className="surface-title">Admin Panel</h1>
+        <p className="text-sm text-slate-600">Manage users, inventory, booking flow, and revenue from one command center.</p>
       </header>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="stagger-up grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="card">
           <p className="text-sm text-slate-500">Users</p>
-          <p className="text-3xl font-bold text-slate-900">{users.length}</p>
+          <p className="text-2xl font-bold text-slate-900 sm:text-3xl">{users.length}</p>
         </div>
         <div className="card">
           <p className="text-sm text-slate-500">Rooms</p>
-          <p className="text-3xl font-bold text-slate-900">{rooms.length}</p>
+          <p className="text-2xl font-bold text-slate-900 sm:text-3xl">{rooms.length}</p>
         </div>
         <div className="card">
           <p className="text-sm text-slate-500">Bookings</p>
-          <p className="text-3xl font-bold text-slate-900">{bookings.length}</p>
+          <p className="text-2xl font-bold text-slate-900 sm:text-3xl">{bookings.length}</p>
         </div>
         <div className="card">
           <p className="text-sm text-slate-500">Revenue</p>
-          <p className="text-3xl font-bold text-emerald-700">{formatCurrency(revenue.revenue)}</p>
+          <p className="text-2xl font-bold text-emerald-700 sm:text-3xl">{formatCurrency(revenue.revenue)}</p>
         </div>
       </div>
 
       <section className="card">
-        <h2 className="mb-4 text-lg font-semibold text-slate-900">Create Room</h2>
+        <h2 className="display-font mb-4 text-2xl font-semibold text-ink-900 sm:text-3xl">Create Room</h2>
         <form onSubmit={handleCreateRoom} className="grid gap-3 sm:grid-cols-4">
           <input
             className="input"
@@ -138,26 +139,26 @@ const AdminPanelPage = () => {
       </section>
 
       <section className="card">
-        <h2 className="mb-4 text-lg font-semibold text-slate-900">Room Inventory</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
+        <h2 className="display-font mb-4 text-2xl font-semibold text-ink-900 sm:text-3xl">Room Inventory</h2>
+        <div className="table-shell overflow-x-auto rounded-xl border border-slate-200 bg-white/70 p-2">
+          <table className="min-w-full">
             <thead>
-              <tr className="border-b border-slate-200 text-left text-slate-500">
-                <th className="py-2">Room</th>
-                <th className="py-2">Type</th>
-                <th className="py-2">Price</th>
-                <th className="py-2">Status</th>
-                <th className="py-2">Action</th>
+              <tr>
+                <th>Room</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {rooms.map((room) => (
-                <tr key={room._id} className="border-b border-slate-100">
-                  <td className="py-2">{room.roomNumber}</td>
-                  <td className="py-2 capitalize">{room.type}</td>
-                  <td className="py-2">{formatCurrency(room.price)}</td>
-                  <td className="py-2 capitalize">{room.status}</td>
-                  <td className="py-2">
+                <tr key={room._id}>
+                  <td>{room.roomNumber}</td>
+                  <td className="capitalize">{room.type}</td>
+                  <td>{formatCurrency(room.price)}</td>
+                  <td className="capitalize">{room.status}</td>
+                  <td>
                     <button type="button" className="btn-secondary" onClick={() => handleDeleteRoom(room._id)}>
                       Delete
                     </button>
@@ -171,23 +172,23 @@ const AdminPanelPage = () => {
 
       {canManageUsers && (
         <section className="card">
-          <h2 className="mb-4 text-lg font-semibold text-slate-900">User Management</h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
+          <h2 className="display-font mb-4 text-2xl font-semibold text-ink-900 sm:text-3xl">User Management</h2>
+          <div className="table-shell overflow-x-auto rounded-xl border border-slate-200 bg-white/70 p-2">
+            <table className="min-w-full">
               <thead>
-                <tr className="border-b border-slate-200 text-left text-slate-500">
-                  <th className="py-2">Name</th>
-                  <th className="py-2">Email</th>
-                  <th className="py-2">Role</th>
-                  <th className="py-2">Actions</th>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {users.map((managedUser) => (
-                  <tr key={managedUser._id} className="border-b border-slate-100">
-                    <td className="py-2">{managedUser.name}</td>
-                    <td className="py-2">{managedUser.email}</td>
-                    <td className="py-2">
+                  <tr key={managedUser._id}>
+                    <td>{managedUser.name}</td>
+                    <td>{managedUser.email}</td>
+                    <td>
                       <select
                         className="input max-w-36"
                         value={managedUser.role}
@@ -198,7 +199,7 @@ const AdminPanelPage = () => {
                         <option value="admin">Admin</option>
                       </select>
                     </td>
-                    <td className="py-2">
+                    <td>
                       <button type="button" className="btn-secondary" onClick={() => handleDeleteUser(managedUser._id)}>
                         Delete
                       </button>

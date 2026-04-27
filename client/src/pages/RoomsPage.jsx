@@ -60,8 +60,9 @@ const RoomsPage = () => {
   return (
     <section className="space-y-6">
       <header>
-        <h1 className="text-2xl font-bold text-slate-900">Rooms</h1>
-        <p className="text-sm text-slate-600">Search and filter available rooms.</p>
+        <p className="surface-subtitle">Inventory</p>
+        <h1 className="surface-title">Rooms</h1>
+        <p className="text-sm text-slate-600">Search and filter premium room inventory instantly.</p>
       </header>
 
       <form onSubmit={handleSearch} className="card grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
@@ -98,7 +99,7 @@ const RoomsPage = () => {
         <div className="card">No rooms found for selected filters.</div>
       ) : (
         <>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="stagger-up grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {rooms.map((room) => (
               <RoomCard key={room._id} room={room} />
             ))}

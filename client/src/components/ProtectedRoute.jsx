@@ -6,7 +6,12 @@ const ProtectedRoute = ({ children, roles }) => {
   const location = useLocation();
 
   if (loading) {
-    return <div className="card">Loading...</div>;
+    return (
+      <div className="card mx-auto mt-12 max-w-md text-center">
+        <p className="surface-subtitle">Preparing Experience</p>
+        <p className="display-font mt-2 text-3xl text-ink-900">Loading...</p>
+      </div>
+    );
   }
 
   if (!isAuthenticated) {

@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
       try {
         const response = await getProfile(auth.token);
-        const next = { ...auth, user: response.data.data };
+        const next = { ...auth, user: response.data };
         setAuth(next);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
       } catch (error) {
